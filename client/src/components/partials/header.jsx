@@ -9,7 +9,7 @@ const Header = (props) => {
         return;
       case false:
         return (
-          <div className="row">
+          <ul className="navbar-nav">
             <li className="nav-item ">
               <a className="nav-link" href="/signin">
                 Sign In
@@ -20,12 +20,12 @@ const Header = (props) => {
                 Sign Up
               </a>
             </li>
-          </div>
+          </ul>
         );
 
       default:
         return (
-          <div className="row">
+          <ul className="navbar-nav">
             <li className="nav-item ">
               <a className="nav-link" href="/user">
                 My Posts
@@ -36,7 +36,7 @@ const Header = (props) => {
                 Log Out
               </a>
             </li>
-          </div>
+          </ul>
         );
     }
   };
@@ -46,9 +46,17 @@ const Header = (props) => {
       <a className="navbar-brand" href="/">
         PicsPie
       </a>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#righttags"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="righttags">
         <ul className="navbar-nav mr-auto"></ul>
-        <ul className="navbar-nav">{renderHeader()}</ul>
+        {renderHeader()}
       </div>
     </nav>
   );

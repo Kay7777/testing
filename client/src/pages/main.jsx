@@ -38,8 +38,8 @@ class MainPage extends React.Component {
             <h1 className="text-monospace display-5">Welcome to PicsPie</h1>
             <hr />
             <p className="lead text-monospace">
-              PicsPie is a social media web application for people to share
-              their life!
+              PicsPie is a social media application for people to share their
+              life!
             </p>
             <Post />
           </Container>

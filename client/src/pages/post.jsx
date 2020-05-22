@@ -32,7 +32,7 @@ class PostPage extends React.Component {
     const { postInfor, postId } = this.state;
     const { currentUser } = this.props;
     return (
-      <div>
+      <div style={{ marginBottom: 50 }}>
         {postInfor ? (
           <div>
             <div className="jumbotron">
@@ -53,18 +53,17 @@ class PostPage extends React.Component {
             </div>
             <Container>
               <div className="row">
-                <div className="col-8">
+                <div className="col-md-8">
                   <img
                     src={keys.AWS_S3 + postInfor.images[0]}
                     className="img-fluid"
                     alt="Responsive image"
                   />
-
-                  <CommentPart postId={postId} />
                 </div>
-                <div className="col-4">
+                <div className="col-md-4" style={{ marginTop: 20 }}>
                   <p className="text-monospace">{postInfor.content}</p>
                 </div>
+                <CommentPart postId={postId} />
               </div>
             </Container>
           </div>
