@@ -33,7 +33,7 @@ class PostPage extends React.Component {
     const { currentUser } = this.props;
     return (
       <div>
-        {postInfor && currentUser ? (
+        {postInfor ? (
           <div>
             <div className="jumbotron">
               <h3 className="text-monospace">{postInfor.title}</h3>
@@ -41,7 +41,7 @@ class PostPage extends React.Component {
               <h5 className="text-monospace">
                 ---- post by {postInfor.userName}
               </h5>
-              {postInfor.userId === currentUser._id ? (
+              {currentUser && postInfor.userId === currentUser._id ? (
                 <Button
                   color="secondary"
                   variant="outlined"
