@@ -43,7 +43,7 @@ module.exports = (app) => {
   });
 
   app.get("/api/post/get/all", async (req, res) => {
-    const allPosts = await Post.find().cache(req.user.id);
+    const allPosts = await Post.find().cache();
     res.send(allPosts);
   });
 
