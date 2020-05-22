@@ -21,10 +21,11 @@ class SignIn extends React.Component {
   handleSignIn = async () => {
     const { email, password, username } = this.state;
     try {
-      const doc = await axios.post("/api/user/signin", {
+      const doc = await axios.get("/api/user/signin", {
         email,
         password,
       });
+      console.log(doc.data);
       window.location = "/";
     } catch {
       this.setState({ error: true });
