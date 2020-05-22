@@ -49,7 +49,7 @@ module.exports = (app) => {
 
   app.get("/api/post/get/user", requireLogin, async (req, res) => {
     const userId = req.user.id;
-    const userPosts = await Post.find({ userId }).cache(req.user.id);
+    const userPosts = await Post.find({ userId }).cache({ key: req.user.id });
     res.send(userPosts);
   });
 
