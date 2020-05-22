@@ -10,6 +10,7 @@ const { json } = require("body-parser");
 app.use(json());
 app.use(flash());
 
+mongoose.Promise = global.Promise;
 mongoose
   .connect(keys.mongoURI, {
     useUnifiedTopology: true,
