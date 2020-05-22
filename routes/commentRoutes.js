@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Comment = mongoose.model("comments");
 const requireLogin = require("../middlewares/requireLogin");
-const cleanCache = require("../middlewares/cleanCache");
 
 module.exports = (app) => {
   app.post(
@@ -24,7 +23,7 @@ module.exports = (app) => {
 
   app.get("/api/comment/get/:id", async (req, res) => {
     const postId = req.params.id;
-    const comments = await Comment.find({ postId: postId }).cache(req.user.id);
+    const comments = await Comment.find({ postId: postId });
     res.send(comments);
   });
 };

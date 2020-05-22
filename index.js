@@ -31,7 +31,6 @@ require("./models/user");
 require("./models/post");
 require("./models/comment");
 
-require("./services/cache");
 require("./services/passport");
 
 require("./routes/authRoutes")(app);
