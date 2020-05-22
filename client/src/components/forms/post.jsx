@@ -39,7 +39,7 @@ class Post extends React.Component {
     await axios
       .put(uploadConfig.data.url, file, {
         headers: {
-          "Content-Type": file.type,
+          "Content-type": file.type,
         },
       })
       .catch((err) => console.log(err));

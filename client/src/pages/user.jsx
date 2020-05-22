@@ -58,11 +58,7 @@ class UserPage extends React.Component {
               </Container>
             </div>
             <Container>
-              {cards.length !== 0 ? (
-                this.renderCards()
-              ) : (
-                <p>Posts are rendering ...</p>
-              )}
+              {cards.length !== 0 ? this.renderCards() : null}
             </Container>
           </div>
         ) : null}
