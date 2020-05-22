@@ -43,19 +43,19 @@ module.exports = (app) => {
   });
 
   app.get("/api/post/get/all", async (req, res) => {
-    const allPosts = await Post.find().cache();
+    const allPosts = await Post.find();
     res.send(allPosts);
   });
 
   app.get("/api/post/get/user", requireLogin, async (req, res) => {
     const userId = req.user.id;
-    const userPosts = await Post.find({ userId }).cache();
+    const userPosts = await Post.find({ userId }).cache(req.user.id);
     res.send(userPosts);
   });
 
   app.get("/api/post/get/:id", async (req, res) => {
     const portId = req.params.id;
-    const post = await Post.findById(portId).cache();
+    const post = await Post.findById(portId);
     res.send(post);
   });
 

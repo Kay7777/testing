@@ -38,12 +38,14 @@ module.exports = (app) => {
     "/api/user/signin",
     checkNotAuthenticated,
     passport.authenticate("local", {
-      successRedirect: "/",
       failureRedirect: "/signin",
-    })
+    }),
+    (req, res) => {
+      res.send("success");
+    }
   );
 
-  app.get("/api/user/signup", checkNotAuthenticated, async (req, res) => {
+  app.post("/api/user/signup", checkNotAuthenticated, async (req, res) => {
     console.log("SIGNUP: Get user infor from frontend", req.body);
     const doc = await User.findOne({ email: req.body.email });
     if (doc) return res.send({ error: "This email has been registed." });

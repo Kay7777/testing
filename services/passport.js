@@ -55,13 +55,13 @@ passport.use(
       console.log(email, password);
       const user = await User.findOne({ email: email });
       console.log(user);
-      if (!user) return callback(null, null, { message: "Email Wrong" });
+      if (!user) return callback(null, false, { message: "Email Wrong" });
       try {
         const result = await bcrypt.compare(password, user.password);
         if (result) return callback(null, user);
-        return callback(null, null, { message: "Password Wrong" });
+        return callback(null, false, { message: "Password Wrong" });
       } catch {
-        return callback(null, null, {
+        return callback(null, false, {
           message: "Please use google account sign in",
         });
       }
