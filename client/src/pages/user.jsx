@@ -47,29 +47,30 @@ class UserPage extends React.Component {
     return (
       <div>
         {currentUser ? (
-          <div class="jumbotron">
-            <Container>
-              <h1 class="display-5 text-monospace">
-                Welcome back {currentUser.username}{" "}
-              </h1>
-              <hr />
-              {cards.length === 0 ? (
-                <p class="lead text-monospace">
-                  You do not have any post yet, post one!
-                </p>
-              ) : (
-                <p class="lead text-monospace">
-                  Congratulation, you have {cards.length} posts now, continue to
-                  post your wonderful life to the world!
-                </p>
-              )}
+          <div>
+            <div class="jumbotron">
+              <Container>
+                <h1 class="display-5 text-monospace">
+                  Welcome back {currentUser.username}{" "}
+                </h1>
+                <hr />
+                {cards.length === 0 ? (
+                  <p class="lead text-monospace">
+                    You do not have any post yet, post one!
+                  </p>
+                ) : (
+                  <p class="lead text-monospace">
+                    Congratulation, you have {cards.length} posts now, continue
+                    to post your wonderful life to the world!
+                  </p>
+                )}
 
-              <Post />
-            </Container>
+                <Post />
+              </Container>
+            </div>
+            <Container>{cards ? this.renderCards() : null}</Container>
           </div>
         ) : null}
-
-        <Container>{cards ? this.renderCards() : null}</Container>
       </div>
     );
   }

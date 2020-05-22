@@ -55,7 +55,7 @@ module.exports = (app) => {
 
   app.get("/api/post/get/:id", async (req, res) => {
     const portId = req.params.id;
-    const post = await Post.findById(portId).cache(req.user.id);
+    const post = await Post.findById(portId).cache();
     res.send(post);
   });
 
