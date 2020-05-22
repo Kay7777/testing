@@ -26,9 +26,10 @@ class SignUp extends React.Component {
       password,
       username,
     });
-    // TODO: pop up
     if (doc.data.error) {
       this.setState({ error: true });
+    } else {
+      window.location = "/signin";
     }
   };
 

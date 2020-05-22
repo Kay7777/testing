@@ -55,7 +55,7 @@ module.exports = (app) => {
       username: req.body.username,
     }).save();
     console.log("SIGNUP: Get user infor from database", user);
-    res.redirect("/signin");
+    res.send({ message: "signup successfully" });
   });
 
   app.get("/auth/current_user", (req, res) => {
