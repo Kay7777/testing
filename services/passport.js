@@ -12,7 +12,7 @@ passport.serializeUser((user, callback) => {
 
 passport.deserializeUser(async (id, callback) => {
   const user = await User.findById(id);
-  callback(null, user);
+  return callback(null, user);
 });
 
 passport.use(
