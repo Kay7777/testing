@@ -9,13 +9,6 @@ const cookieSession = require("cookie-session");
 app.use(json());
 app.use(flash());
 
-require("./models/user");
-require("./models/post");
-require("./models/comment");
-
-require("./services/cache");
-require("./services/passport");
-
 mongoose.Promise = global.Promise;
 mongoose
   .connect(keys.mongoURI, {
@@ -33,6 +26,13 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+require("./models/user");
+require("./models/post");
+require("./models/comment");
+
+require("./services/cache");
+require("./services/passport");
 
 require("./routes/authRoutes")(app);
 require("./routes/postRoutes")(app);
