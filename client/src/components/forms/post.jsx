@@ -67,12 +67,12 @@ class Post extends React.Component {
     const { title, content, images, imageDone } = this.state;
     return (
       <Paper>
-        <Container style={{ paddingTop: 10 }}>
+        <Container style={{ paddingTop: 10, width: "90%" }}>
           <TextField
             id="standard-basic"
             label="Title"
             value={title}
-            style={{ width: 200, marginBottom: 10 }}
+            style={{ width: "90%", marginBottom: 10 }}
             onChange={(e) => this.setState({ title: e.target.value })}
           />
           <br />
@@ -82,7 +82,7 @@ class Post extends React.Component {
             multiline
             value={content}
             rows={10}
-            style={{ width: 500, marginBottom: 10 }}
+            style={{ width: "90%", marginBottom: 10 }}
             onChange={(e) => this.setState({ content: e.target.value })}
           />
           <br />
@@ -103,7 +103,7 @@ class Post extends React.Component {
               color="primary"
               style={{
                 marginTop: 10,
-                width: 200,
+                width: "90%",
                 marginBottom: 20,
                 backgroundColor: "#4285F4",
               }}
@@ -118,7 +118,7 @@ class Post extends React.Component {
               disabled="true"
               style={{
                 marginTop: 10,
-                width: 200,
+                width: "90%",
                 marginBottom: 20,
                 backgroundColor: "#4285F4",
               }}
@@ -148,7 +148,7 @@ class Post extends React.Component {
                 variant="contained"
                 color="secondary"
                 style={{
-                  width: 150,
+                  width: "20%",
                   marginTop: 10,
                 }}
                 onClick={() => this.setState({ postShow: !postShow })}
@@ -171,7 +171,7 @@ class Post extends React.Component {
             variant="contained"
             color="primary"
             style={{
-              width: 150,
+              width: "20%",
               marginTop: 10,
               backgroundColor: "#4285F4",
             }}
@@ -184,7 +184,7 @@ class Post extends React.Component {
             variant="contained"
             color="primary"
             style={{
-              width: 200,
+              width: "20%",
               marginTop: 10,
               backgroundColor: "#4285F4",
             }}

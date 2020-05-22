@@ -33,7 +33,7 @@ class CommentForm extends React.Component {
             multiline
             value={content}
             rows={2}
-            style={{ width: 300 }}
+            style={{ width: "90%" }}
             onChange={(e) => this.setState({ content: e.target.value })}
           />
           {currentUser ? (
@@ -55,7 +55,7 @@ class CommentForm extends React.Component {
               variant="contained"
               style={{
                 marginTop: 10,
-                width: 250,
+                width: "90%",
                 marginBottom: 20,
                 backgroundColor: "#4285F4",
               }}

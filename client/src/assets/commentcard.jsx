@@ -29,7 +29,11 @@ export default function SimpleCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card
+      className={classes.root}
+      variant="outlined"
+      style={{ width: "100%", marginRight: "30%" }}
+    >
       <CardContent>
         <div className="row" style={{ marginBottom: 5 }}>
           {props.photo ? (
