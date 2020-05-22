@@ -33,7 +33,7 @@ class PostPage extends React.Component {
     const { currentUser } = this.props;
     return (
       <div>
-        {postInfor ? (
+        {postInfor && currentUser ? (
           <div>
             <div className="jumbotron">
               <h3 className="text-monospace">{postInfor.title}</h3>
