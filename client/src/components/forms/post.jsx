@@ -8,8 +8,9 @@ import {
 import { Alert } from "@material-ui/lab";
 import React from "react";
 import axios from "axios";
-import PostCard from "../../assets/postcard";
+import PostCard from "../../assets/fakepostcard";
 import { connect } from "react-redux";
+import keys from "../../assets/keys";
 
 class Post extends React.Component {
   constructor() {
@@ -22,7 +23,6 @@ class Post extends React.Component {
       postShow: false,
       posting: false,
       imageDone: false,
-      alert: false,
     };
   }
 
@@ -43,6 +43,7 @@ class Post extends React.Component {
         },
       })
       .catch((err) => console.log(err));
+    console.log(uploadConfig.data.key);
     this.setState({
       images: uploadConfig.data.key,
       imageDone: true,
@@ -58,14 +59,7 @@ class Post extends React.Component {
       images,
       videos,
     });
-    await this.setState({
-      title: "",
-      content: "",
-      images: "",
-      videos: "",
-      posting: false,
-      alert: true,
-    });
+    window.location = "/user";
   };
 
   showPostForm = () => {
@@ -165,10 +159,7 @@ class Post extends React.Component {
                 <PostCard
                   title={title}
                   content={content}
-                  image={
-                    "https://fullstackproject.s3.ca-central-1.amazonaws.com/" +
-                    images
-                  }
+                  image={images}
                   user={currentUser}
                 />
               </div>
@@ -200,13 +191,6 @@ class Post extends React.Component {
             Need login to post
           </Button>
         )}
-        <Snackbar
-          open={alert}
-          autoHideDuration={2000}
-          onClose={() => this.setState({ alert: false })}
-        >
-          <Alert severity="success">Your New Post Successful!</Alert>
-        </Snackbar>
       </div>
     );
   }

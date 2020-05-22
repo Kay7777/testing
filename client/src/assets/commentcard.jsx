@@ -32,9 +32,14 @@ export default function SimpleCard(props) {
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <div className="row" style={{ marginBottom: 5 }}>
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {props.username[0]}
-          </Avatar>
+          {props.photo ? (
+            <Avatar className={classes.avatar} src={props.photo} />
+          ) : (
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              {props.username[0]}
+            </Avatar>
+          )}
+
           <Typography className={classes.pos} color="textSecondary">
             {props.username}
           </Typography>

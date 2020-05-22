@@ -8,7 +8,7 @@ class MainPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      cards: null,
+      cards: [],
     };
   }
 
@@ -23,18 +23,7 @@ class MainPage extends React.Component {
     return (
       <div className="row">
         {cards.map((card, index) => {
-          return (
-            <PostCard
-              key={index}
-              title={card.title}
-              content={card.content}
-              id={card._id}
-              image={
-                "https://fullstackproject.s3.ca-central-1.amazonaws.com/" +
-                card.images[0]
-              }
-            />
-          );
+          return <PostCard key={index} card={card} />;
         })}
       </div>
     );
@@ -55,7 +44,7 @@ class MainPage extends React.Component {
             <Post />
           </Container>
         </div>
-        <Container>{cards ? this.renderCards() : null}</Container>
+        <Container>{cards.length !== 0 ? this.renderCards() : null}</Container>
       </div>
     );
   }

@@ -28,6 +28,7 @@ require("./models/post");
 require("./models/comment");
 
 require("./services/passport");
+require("./services/cache");
 
 require("./routes/authRoutes")(app);
 require("./routes/postRoutes")(app);

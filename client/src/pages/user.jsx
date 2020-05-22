@@ -24,18 +24,7 @@ class UserPage extends React.Component {
     return (
       <div className="row">
         {cards.map((card, index) => {
-          return (
-            <PostCard
-              key={index}
-              title={card.title}
-              content={card.content}
-              id={card._id}
-              image={
-                "https://fullstackproject.s3.ca-central-1.amazonaws.com/" +
-                card.images[0]
-              }
-            />
-          );
+          return <PostCard key={index} card={card} />;
         })}
       </div>
     );
@@ -48,18 +37,18 @@ class UserPage extends React.Component {
       <div>
         {currentUser ? (
           <div>
-            <div class="jumbotron">
+            <div className="jumbotron">
               <Container>
-                <h1 class="display-5 text-monospace">
+                <h1 className="display-5 text-monospace">
                   Welcome back {currentUser.username}{" "}
                 </h1>
                 <hr />
                 {cards.length === 0 ? (
-                  <p class="lead text-monospace">
+                  <p className="lead text-monospace">
                     You do not have any post yet, post one!
                   </p>
                 ) : (
-                  <p class="lead text-monospace">
+                  <p className="lead text-monospace">
                     Congratulation, you have {cards.length} posts now, continue
                     to post your wonderful life to the world!
                   </p>
@@ -68,7 +57,13 @@ class UserPage extends React.Component {
                 <Post />
               </Container>
             </div>
-            <Container>{cards ? this.renderCards() : null}</Container>
+            <Container>
+              {cards.length !== 0 ? (
+                this.renderCards()
+              ) : (
+                <p>Posts are rendering ...</p>
+              )}
+            </Container>
           </div>
         ) : null}
       </div>

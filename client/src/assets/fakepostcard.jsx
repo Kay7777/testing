@@ -53,29 +53,27 @@ export default function RecipeReviewCard(props) {
     <Card className={classes.root} variant="outlined">
       <CardHeader
         avatar={
-          props.card.userPhoto ? (
+          props.user.photo ? (
             <Avatar
               aria-label="recipe"
               className={classes.avatar}
-              src={props.card.userPhoto}
+              src={props.user.photo}
             />
           ) : (
             <Avatar aria-label="recipe" className={classes.avatar}>
-              {props.card.userName[0]}
+              {props.user.username[0]}
             </Avatar>
           )
         }
-        title={props.card.title}
-        // style={{ backgroundColor: "#30475e", color: "#ffffff" }}
-        subheader={props.card.createAt}
+        title={props.title}
+        style={{ backgroundColor: "#F0FFFF" }}
+        // subheader={new Date()}
       />
-      <CardActionArea href={"/post/" + props.card._id}>
-        <CardMedia
-          className={classes.media}
-          image={keys.AWS_S3 + props.card.images[0]}
-          title="Paella dish"
-        />
-      </CardActionArea>
+      <CardMedia
+        className={classes.media}
+        image={keys.AWS_S3 + props.image}
+        title="Paella dish"
+      />
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
@@ -96,7 +94,7 @@ export default function RecipeReviewCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{props.card.content}</Typography>
+          <Typography paragraph>{props.content}</Typography>
         </CardContent>
       </Collapse>
     </Card>

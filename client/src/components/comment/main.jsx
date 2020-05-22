@@ -15,22 +15,9 @@ class CommentPart extends React.Component {
 
   componentDidMount = async () => {
     const { postId } = this.state;
-    let structuredComments = [];
-    let promises = [];
     const comments = await axios.get("/api/comment/get/" + postId);
     console.log(comments.data);
-    await comments.data.forEach((comment) => {
-      promises.push(
-        axios.get("/api/user/get/" + comment.userId).then((res) => {
-          const { username, photo } = res.data;
-          const { content } = comment;
-          structuredComments.push({ username, photo, content });
-        })
-      );
-    });
-    await Promise.all(promises).then(() =>
-      this.setState({ comments: structuredComments })
-    );
+    this.setState({ comments: comments.data });
   };
 
   render() {
@@ -43,8 +30,8 @@ class CommentPart extends React.Component {
             <CommentCard
               key={index}
               content={comment.content}
-              photo={comment.photo}
-              username={comment.username}
+              photo={comment.userPhoto}
+              username={comment.userName}
             />
           ))
         ) : (

@@ -3,13 +3,13 @@ import axios from "axios";
 import { Container, Button } from "@material-ui/core";
 import CommentPart from "../components/comment/main";
 import { connect } from "react-redux";
+import keys from "../assets/keys";
 
 class PostPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       postId: this.props.match.params.id,
-      userInfor: null,
       postInfor: null,
     };
   }
@@ -17,10 +17,7 @@ class PostPage extends React.Component {
   componentDidMount = async () => {
     const { postId } = this.state;
     const postInfor = await axios.get("/api/post/get/" + postId);
-    const { userId } = postInfor.data;
-    const userInfor = await axios.get("/api/user/get/" + userId);
     await this.setState({
-      userInfor: userInfor.data,
       postInfor: postInfor.data,
     });
   };
@@ -32,17 +29,17 @@ class PostPage extends React.Component {
   };
 
   render() {
-    const { postInfor, userInfor, postId } = this.state;
+    const { postInfor, postId } = this.state;
     const { currentUser } = this.props;
     return (
       <div>
-        {postInfor && userInfor ? (
+        {postInfor ? (
           <div>
-            <div class="jumbotron">
+            <div className="jumbotron">
               <h3 className="text-monospace">{postInfor.title}</h3>
               <hr />
               <h5 className="text-monospace">
-                ---- post by {userInfor.username}
+                ---- post by {postInfor.userName}
               </h5>
               {postInfor.userId === currentUser._id ? (
                 <Button
@@ -58,11 +55,8 @@ class PostPage extends React.Component {
               <div className="row">
                 <div className="col-8">
                   <img
-                    src={
-                      "https://fullstackproject.s3.ca-central-1.amazonaws.com/" +
-                      postInfor.images[0]
-                    }
-                    class="img-fluid"
+                    src={keys.AWS_S3 + postInfor.images[0]}
+                    className="img-fluid"
                     alt="Responsive image"
                   />
 
