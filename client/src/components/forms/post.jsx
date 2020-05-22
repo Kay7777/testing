@@ -36,6 +36,7 @@ class Post extends React.Component {
   handleUploadImage = async (e) => {
     const file = e.target.files[0];
     const uploadConfig = await axios.get("/api/image/upload");
+    console.log(file);
     await axios
       .put(uploadConfig.data.url, file, {
         headers: {
