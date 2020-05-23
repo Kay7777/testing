@@ -1,15 +1,16 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import axios from "axios";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/actions.js";
+import ErrorBoundary from "./components/error/errorboundary";
 import Header from "./components/partials/header";
-import Bottom from "./components/partials/bottom";
-import SignUp from "./pages/signup";
-import SignIn from "./pages/signin";
-import MainPage from "./pages/main";
-import UserPage from "./pages/user";
-import PostPage from "./pages/post";
+import Footer from "./components/partials/footer";
+const MainPage = lazy(() => import("./pages/main"));
+const PostPage = lazy(() => import("./pages/post"));
+const UserPage = lazy(() => import("./pages/user"));
+const SignIn = lazy(() => import("./pages/signin"));
+const SignUp = lazy(() => import("./pages/signup"));
 
 class App extends React.Component {
   constructor() {
@@ -27,12 +28,17 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <Header />
-          <Route exact path="/" component={MainPage} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/user" component={UserPage} />
-          <Route path="/post/:id" component={PostPage} />
-          <Bottom />
+          <ErrorBoundary>
+            <Suspense fallback={null}>
+              <Route exact path="/" component={MainPage} />
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/user" component={UserPage} />
+              <Route path="/post/:id" component={PostPage} />
+            </Suspense>
+          </ErrorBoundary>
+
+          <Footer />
         </BrowserRouter>
       </div>
     );
