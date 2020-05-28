@@ -4,6 +4,7 @@ const passport = require("passport");
 const flash = require("express-flash");
 const keys = require("./config/keys");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const { json } = require("body-parser");
 app.use(json());
@@ -17,13 +18,13 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+app.use(cookieParser());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [keys.cookieKey],
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
