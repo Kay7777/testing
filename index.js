@@ -19,7 +19,7 @@ mongoose
 app.use(cookieParser());
 app.use(
   session({
-    secret: keys.cookieKey,
+    secret: "keyboard cat",
   })
 );
 
