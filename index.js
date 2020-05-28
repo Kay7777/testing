@@ -5,13 +5,10 @@ const passport = require("passport");
 const keys = require("./config/keys");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-// const session = require("express-session");
-const cookieSession = require("cookie-session");
+const session = require("express-session");
 const { json } = require("body-parser");
 app.use(json());
-// app.use(flash());
 
-// mongoose.Promise = global.Promise;
 mongoose
   .connect(keys.mongoURI, {
     useUnifiedTopology: true,
@@ -20,16 +17,12 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(cookieParser());
-// app.use(session({ secret: "keyboard cat" }));
 app.use(
-  cookieSession({
-    name: "session",
-    resave: true,
-    saveUninitialized: true,
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey],
+  session({
+    secret: "keyboard cat",
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
