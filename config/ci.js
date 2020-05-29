@@ -1,12 +1,11 @@
 module.exports = {
-  googleClientID:
-    "50414618384-8kuivoqh8ne3gc1bj5h2crqkf5eoador.apps.googleusercontent.com",
-  googleClientSecret: "y7Yx7fPFXGgx1AQ3EA3onV6-",
-  cookieKey: "asndugfuwbefnaidnugbadasudhuewifiufanda",
-  AWSKeyId: "",
-  AWSSecretKey: "",
-  Bucket: "",
-  region: "",
-  mongoURI: "mongodb://127.0.0.1:27017/picspie_ci",
-  redisUrl: "redis://127.0.0.1:6379",
+  googleClientID: process.env.GOOGLE_CLIENT_ID,
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  mongoURI: process.env.MONGO_URI,
+  cookieKey: process.env.COOKIE_KEY,
+  AWSKeyId: process.env.AWS_KEY_ID,
+  AWSSecretKey: process.env.AWS_SECRET_KEY,
+  Bucket: process.env.AWS_BUCKET,
+  region: process.env.AWS_REGION,
+  redisUrl: process.env.REDIS_URL,
 };
