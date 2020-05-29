@@ -3,7 +3,6 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const User = mongoose.model("users");
 const requireLogin = require("../middlewares/requireLogin");
-const cleanCache = require("../middlewares/cleanCache");
 
 const checkNotAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -65,7 +64,7 @@ module.exports = (app) => {
     res.send(req.user);
   });
 
-  app.get("/auth/logout", cleanCache, (req, res) => {
+  app.get("/auth/logout", (req, res) => {
     req.logout();
     res.redirect("/signin");
   });

@@ -1,21 +1,17 @@
-const puppeteer = require("puppeteer");
-
-let browser, page;
+const Page = require("./helper/page");
+let page;
 
 beforeEach(async () => {
-  browser = await puppeteer.launch({
-    headless: false, // show the real page
-  });
-  page = await browser.newPage();
-  await page.goto("localhost:3000");
+  page = await Page.build();
+  await page.goto("http://localhost:3000");
 });
 
 afterEach(async () => {
-  await browser.close();
+  await page.close();
 });
 
 test("Launch the main page", async () => {
-  const text = await page.$eval("a.navbar-brand", (ele) => ele.innerHTML);
+  const text = await page.getContentsOf("a.navbar-brand");
   expect(text).toEqual("PicsPie");
 });
 
@@ -24,4 +20,10 @@ test("Google OAuth signin", async () => {
   await page.click("a span.MuiButton-label");
   const url = await page.url();
   expect(url).toMatch(/accounts\.google\.com/);
+});
+
+test("After signin, show Log Out Button", async () => {
+  await page.login();
+  const text = await page.getContentsOf('a[href="/auth/logout"]');
+  expect(text).toEqual("Log Out");
 });

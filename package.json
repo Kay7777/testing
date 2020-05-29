@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./tests/setup.js"
+    ]
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"redis-server\" \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": "npm run build",
     "test": "jest --detectOpenHandles"
   },
   "keywords": [],
@@ -17,12 +23,9 @@
   "dependencies": {
     "aws-sdk": "^2.681.0",
     "bcrypt": "^4.0.1",
-    "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
-    "cookie-parser": "^1.4.5",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
-    "express-session": "^1.4.0",
     "jest": "^24.9.0",
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.15",
@@ -31,8 +34,10 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "puppeteer": "^3.1.0",
+    "safe-buffer": "^5.2.1",
     "redis": "^3.0.2",
     "uuid": "^3.3.2",
-    "babel-jest": "^24.9.0"
+    "babel-jest": "^24.9.0",
+    "keygrip": "^1.1.0"
   }
 }
