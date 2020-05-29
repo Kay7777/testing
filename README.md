@@ -13,6 +13,12 @@ also Implemented image upload with AWS S3 and aws-sdk library.
 4. Implemented the comment system.
 5. Used Redis to optimize user dashboard data
 
+## 2020.05.29
+
+1. Added Redis-Server for picspie
+2. Added Jest integretion testing
+3. Connected to Travis CI
+
 ## TODO List -- features :
 
 1. Multiple images upload
@@ -23,8 +29,6 @@ also Implemented image upload with AWS S3 and aws-sdk library.
 
 ## TODO List -- technologies:
 
-2. Add Jest testing and Automation Continous Integretion
 3. Use Docker to optimze the deploy.
 4. Make it into Microservices to enhance the performance
 5. Add React frontend liraries to optimize performance
-6.
