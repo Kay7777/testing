@@ -4,8 +4,9 @@ const passport = require("passport");
 // const flash = require("express-flash");
 const keys = require("./config/keys");
 const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
+// const cookieParser = require("cookie-parser");
+// const session = require("express-session");
+const cookieSession = require("cookie-session");
 const { json } = require("body-parser");
 app.use(json());
 
@@ -15,13 +16,25 @@ mongoose
     useNewUrlParser: true,
   })
   .catch((err) => console.log(err));
-
-app.use(cookieParser());
 app.use(
-  session({
-    secret: "keyboard cat",
+  cookieSession({
+    name: "session",
+    keys: [keys.cookieKey],
+    secret: "secret",
+    cookie: {
+      secure: true,
+      httpOnly: false,
+      path: "foo/bar",
+      expires: new Date(Date.now() + 60 * 60 * 1000),
+    },
   })
 );
+// app.use(cookieParser());
+// app.use(
+//   session({
+//     secret: "keyboard cat",
+//   })
+// );
 
 app.use(passport.initialize());
 app.use(passport.session());
