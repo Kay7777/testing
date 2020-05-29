@@ -1,5 +1,14 @@
 # PicsPie (2020 new version)
 
+## Technology
+
+1. Frontend: React, Redux (logger)
+2. Backend: Node.js, Express, Mongoose
+3. Authetication: Passport, Google-OAuth2.0, local-strategy, cookie-session
+4. Database: MongoDB, AWS S3, Redis
+5. Testing: Jest, Puppeteer, safe-buffer, keygrip
+6. Dev tools: Github, Postman, Travis CI, Heroku, BootStrap
+
 ## 2020.05.20
 
 implemented the user authentication system with passport local-strategy and google-oauth-strategy
@@ -31,4 +40,4 @@ also Implemented image upload with AWS S3 and aws-sdk library.
 
 3. Use Docker to optimze the deploy.
 4. Make it into Microservices to enhance the performance
-5. Add React frontend liraries to optimize performance
+5. Add React & Redux liraries to optimize performance
