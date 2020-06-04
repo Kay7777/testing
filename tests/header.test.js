@@ -16,7 +16,7 @@ test("Launch the main page", async () => {
 });
 
 test("Google OAuth signin", async () => {
-  await page.goto("localhost:3000/signin");
+  await page.goto("http://localhost:3000/signin");
   await page.click("a span.MuiButton-label");
   const url = await page.url();
   expect(url).toMatch(/accounts\.google\.com/);
