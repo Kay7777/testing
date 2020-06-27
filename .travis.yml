@@ -6,14 +6,14 @@ services:
   - mongodb
   - redis-server
 env:
-  - PORT=3000
+  - NODE_ENV=ci PORT=3000
 cache:
   directories:
     - node_modules
     - client/node_modules
 install:
   - npm install
-  - npm run build
+  - CI=false npm run build
 script:
   - nohup npm run start &
   - sleep 3
