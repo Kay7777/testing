@@ -6,11 +6,10 @@ services:
   - mongodb
   - redis-server
 env:
-  - NODE_ENV=ci PORT=3000
+  - PORT=3000
 cache:
   directories:
     - node_modules
-
     - client/node_modules
 install:
   - npm install
