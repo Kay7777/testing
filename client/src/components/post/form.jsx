@@ -1,18 +1,13 @@
-import {
-  TextField,
-  Button,
-  Container,
-  Paper,
-  Snackbar,
-} from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+import { TextField, Button, Container, Paper } from "@material-ui/core";
 import React from "react";
 import axios from "axios";
 import PostCard from "../../assets/fakepostcard";
 import { connect } from "react-redux";
-import keys from "../../assets/keys";
+import { selectCurrentUser } from "../../selectors/user";
+import { createStructuredSelector } from "reselect";
+import * as actions from "../../actions";
 
-class Post extends React.Component {
+class PostForm extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -26,17 +21,9 @@ class Post extends React.Component {
     };
   }
 
-  // TODO: upload multiple images
-  // handleAddImage = async (e) => {
-  //   const { images } = this.state;
-  //   const newImages = images.push(e.target.files[0]);
-  //   this.setState({ images: newImages });
-  // };
-
   handleUploadImage = async (e) => {
     const file = e.target.files[0];
     const uploadConfig = await axios.get("/api/image/upload");
-    console.log(file);
     await axios
       .put(uploadConfig.data.url, file, {
         headers: {
@@ -54,13 +41,17 @@ class Post extends React.Component {
   handlePost = async () => {
     const { images, title, content, videos } = this.state;
     await this.setState({ posting: true });
-    const post = await axios.post("/api/post/create", {
-      title,
-      content,
-      images,
-      videos,
-    });
-    window.location = "/user";
+    this.props.CreateNewPost(
+      {
+        title,
+        content,
+        images,
+        videos,
+      },
+      () => {
+        window.location = "/user";
+      }
+    );
   };
 
   showPostForm = () => {
@@ -93,7 +84,6 @@ class Post extends React.Component {
               accept="image/*"
               onChange={(e) => this.handleUploadImage(e)}
             />
-            {/* {images.length} / 3 */}
           </div>
 
           <br />
@@ -196,8 +186,8 @@ class Post extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, actions)(PostForm);

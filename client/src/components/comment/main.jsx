@@ -1,8 +1,11 @@
 import CommentCard from "../../assets/commentcard";
-import CommentForm from "../forms/comment";
+import CommentForm from "./form";
 import React from "react";
-import axios from "axios";
 import { Container } from "@material-ui/core";
+import { selectCurrentComments } from "../../selectors/comment";
+import { createStructuredSelector } from "reselect";
+import * as actions from "../../actions";
+import { connect } from "react-redux";
 
 class CommentPart extends React.Component {
   constructor(props) {
@@ -15,16 +18,15 @@ class CommentPart extends React.Component {
 
   componentDidMount = async () => {
     const { postId } = this.state;
-    const comments = await axios.get("/api/comment/get/" + postId);
-    console.log(comments.data);
-    this.setState({ comments: comments.data });
+    await this.props.SetCurrentComments(postId);
+    this.setState({ comments: this.props.currentComments });
   };
 
   render() {
     const { comments, postId } = this.state;
     return (
       <Container>
-        <CommentForm postId={postId} />
+        <CommentForm postId={postId} renderComments={this.componentDidMount} />
         {comments.length !== 0 ? (
           comments.map((comment, index) => (
             <CommentCard
@@ -42,4 +44,8 @@ class CommentPart extends React.Component {
   }
 }
 
-export default CommentPart;
+const mapStateToProps = createStructuredSelector({
+  currentComments: selectCurrentComments,
+});
+
+export default connect(mapStateToProps, actions)(CommentPart);

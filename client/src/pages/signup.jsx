@@ -1,8 +1,6 @@
 import React from "react";
-import axios from "axios";
 import Alert from "@material-ui/lab/Alert";
 import {
-  Card,
   CardContent,
   Typography,
   Button,
@@ -10,6 +8,8 @@ import {
   Container,
   Snackbar,
 } from "@material-ui/core";
+import * as actions from "../actions";
+import { connect } from "react-redux";
 
 class SignUp extends React.Component {
   state = {
@@ -21,16 +21,13 @@ class SignUp extends React.Component {
 
   handleSignUp = async () => {
     const { email, password, username } = this.state;
-    const doc = await axios.post("/api/user/signup", {
-      email,
-      password,
-      username,
+    this.props.UserSignUp({ email, password, username }, (res) => {
+      if (res.data.error) {
+        this.setState({ error: true });
+      } else {
+        this.props.history.push("/signin");
+      }
     });
-    if (doc.data.error) {
-      this.setState({ error: true });
-    } else {
-      window.location = "/signin";
-    }
   };
 
   render() {
@@ -108,4 +105,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default connect(null, actions)(SignUp);

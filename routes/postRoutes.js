@@ -42,24 +42,24 @@ module.exports = (app) => {
     res.status(201).send(post);
   });
 
-  app.get("/api/post/get/all", async (req, res) => {
+  app.get("/api/post/all", async (req, res) => {
     const allPosts = await Post.find();
     res.send(allPosts);
   });
 
-  app.get("/api/post/get/user", requireLogin, async (req, res) => {
+  app.get("/api/post/user", requireLogin, async (req, res) => {
     const userId = req.user.id;
-    const userPosts = await Post.find({ userId }).cache({ key: req.user.id });
+    const userPosts = await Post.find({ userId }).cache({ key: userId });
     res.send(userPosts);
   });
 
-  app.get("/api/post/get/:id", async (req, res) => {
+  app.get("/api/post/:id", async (req, res) => {
     const portId = req.params.id;
     const post = await Post.findById(portId);
     res.send(post);
   });
 
-  app.post("/api/post/delete/:id", cleanCache, async (req, res) => {
+  app.delete("/api/post/:id", cleanCache, async (req, res) => {
     const postId = req.params.id;
     await Post.findByIdAndDelete(postId);
     res.send("Successful deleted.");

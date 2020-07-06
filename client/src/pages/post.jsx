@@ -1,8 +1,11 @@
 import React from "react";
-import axios from "axios";
 import { Container, Button } from "@material-ui/core";
 import CommentPart from "../components/comment/main";
 import { connect } from "react-redux";
+import { selectCurrentUser } from "../selectors/user";
+import { selectCurrentPost } from "../selectors/post";
+import { createStructuredSelector } from "reselect";
+import * as actions from "../actions";
 import keys from "../assets/keys";
 
 class PostPage extends React.Component {
@@ -16,16 +19,15 @@ class PostPage extends React.Component {
 
   componentDidMount = async () => {
     const { postId } = this.state;
-    const postInfor = await axios.get("/api/post/get/" + postId);
-    await this.setState({
-      postInfor: postInfor.data,
-    });
+    await this.props.SetCurrentPost(postId);
+    this.setState({ postInfor: this.props.currentPost });
   };
 
   handleDelete = async () => {
     const { postId } = this.state;
-    await axios.post("/api/post/delete/" + postId);
-    window.location = "/user";
+    await this.props.DeleteUserPost(postId, () => {
+      this.props.history.push("/user");
+    });
   };
 
   render() {
@@ -73,8 +75,9 @@ class PostPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentPost: selectCurrentPost,
+  currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(PostPage);
+export default connect(mapStateToProps, actions)(PostPage);

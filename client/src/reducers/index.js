@@ -3,8 +3,8 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import userReducer from "./user";
-// import postReducer from "./post";
-// import commentReducer from "./comment";
+import postReducer from "./post";
+import commentReducer from "./comment";
 
 const persistConfig = {
   key: "root", // from root
@@ -14,8 +14,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
-  // post: postReducer,
-  // comment: commentReducer,
+  post: postReducer,
+  comment: commentReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

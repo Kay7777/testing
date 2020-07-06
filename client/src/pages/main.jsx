@@ -1,21 +1,23 @@
 import React from "react";
-import { Container, Button } from "@material-ui/core";
-import axios from "axios";
+import { Container } from "@material-ui/core";
 import Post from "../components/forms/post";
 import PostCard from "../assets/postcard";
+import { connect } from "react-redux";
+import { selectAllPosts } from "../selectors/post";
+import { createStructuredSelector } from "reselect";
+import * as actions from "../actions";
 
 class MainPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       cards: [],
     };
   }
 
   componentDidMount = async () => {
-    const allPosts = await axios.get("/api/post/get/all");
-    await this.setState({ cards: allPosts.data });
-    console.log(this.state);
+    await this.props.SetAllPosts();
+    this.setState({ cards: this.props.allPosts });
   };
 
   renderCards = () => {
@@ -30,7 +32,7 @@ class MainPage extends React.Component {
   };
 
   render() {
-    const { cards, post } = this.state;
+    const { cards } = this.state;
     return (
       <div>
         <div className="jumbotron">
@@ -50,4 +52,8 @@ class MainPage extends React.Component {
   }
 }
 
-export default MainPage;
+const mapStateToProps = createStructuredSelector({
+  allPosts: selectAllPosts,
+});
+
+export default connect(mapStateToProps, actions)(MainPage);

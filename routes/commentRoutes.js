@@ -3,7 +3,7 @@ const Comment = mongoose.model("comments");
 const requireLogin = require("../middlewares/requireLogin");
 
 module.exports = (app) => {
-  app.post("/api/comment/create/:id", requireLogin, async (req, res) => {
+  app.post("/api/comment/:id", requireLogin, async (req, res) => {
     const { content } = req.body;
     const userId = req.user.id;
     const postId = req.params.id;
@@ -18,7 +18,7 @@ module.exports = (app) => {
     res.send(comment);
   });
 
-  app.get("/api/comment/get/:id", async (req, res) => {
+  app.get("/api/comment/:id", async (req, res) => {
     const postId = req.params.id;
     const comments = await Comment.find({ postId: postId });
     res.send(comments);

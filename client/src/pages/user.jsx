@@ -1,9 +1,12 @@
 import React from "react";
 import { Container, Button } from "@material-ui/core";
-import axios from "axios";
 import Post from "../components/forms/post";
 import PostCard from "../assets/postcard";
 import { connect } from "react-redux";
+import { selectUserPosts } from "../selectors/post";
+import { selectCurrentUser } from "../selectors/user";
+import { createStructuredSelector } from "reselect";
+import * as actions from "../actions";
 
 class UserPage extends React.Component {
   constructor() {
@@ -14,9 +17,8 @@ class UserPage extends React.Component {
   }
 
   componentDidMount = async () => {
-    const allPosts = await axios.get("/api/post/get/user");
-    await this.setState({ cards: allPosts.data });
-    console.log(this.state);
+    await this.props.SetUserPosts();
+    this.setState({ cards: this.props.userPosts });
   };
 
   renderCards = () => {
@@ -67,8 +69,9 @@ class UserPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  userPosts: selectUserPosts,
+  currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(UserPage);
+export default connect(mapStateToProps, actions)(UserPage);

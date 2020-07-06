@@ -1,7 +1,9 @@
 import React from "react";
-import { TextField, Button, Container, Typography } from "@material-ui/core";
-import axios from "axios";
+import { TextField, Button, Container } from "@material-ui/core";
+import * as actions from "../../actions";
 import { connect } from "react-redux";
+import { selectCurrentUser } from "../../selectors/user";
+import { createStructuredSelector } from "reselect";
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -14,11 +16,10 @@ class CommentForm extends React.Component {
   }
 
   postComment = async () => {
-    const { title, content, postId } = this.state;
-    const infor = await axios.post("/api/comment/create/" + postId, {
-      content,
+    const { content, postId } = this.state;
+    this.props.CreateNewComment(postId, { content }, (res) => {
+      if (!res.data.err) this.props.renderComments();
     });
-    if (!infor.data.err) window.location = "/post/" + postId;
   };
 
   render() {
@@ -69,8 +70,8 @@ class CommentForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(CommentForm);
+export default connect(mapStateToProps, actions)(CommentForm);
