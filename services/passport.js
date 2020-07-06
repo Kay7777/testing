@@ -52,9 +52,7 @@ passport.use(
   new LocalStrategy(
     { usernameField: "email" },
     async (email, password, callback) => {
-      console.log(email, password);
       const user = await User.findOne({ email: email });
-      console.log(user);
       if (!user) return callback(null, false);
       try {
         const result = await bcrypt.compare(password, user.password);

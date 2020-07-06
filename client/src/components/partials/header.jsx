@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../selectors/user";
+import * as actions from "../../actions";
 
 const Header = (props) => {
   const renderHeader = () => {
-    const { currentUser } = props;
-    switch (currentUser) {
+    console.log(props);
+    switch (props.currentUser) {
       case null:
-        return;
-      case false:
         return (
           <ul className="navbar-nav">
             <li className="nav-item ">
@@ -32,7 +33,18 @@ const Header = (props) => {
               </a>
             </li>
             <li className="nav-item ">
-              <a className="nav-link" href="/auth/logout">
+              <a
+                className="nav-link"
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={() =>
+                  props.UserLogOut((res) => {
+                    if (res && res.data.message === "SignOut successfully")
+                      window.location = "/signin";
+                  })
+                }
+              >
                 Log Out
               </a>
             </li>
@@ -62,8 +74,8 @@ const Header = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);

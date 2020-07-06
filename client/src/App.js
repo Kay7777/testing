@@ -1,8 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import axios from "axios";
 import { BrowserRouter, Route } from "react-router-dom";
-import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/user/actions.js";
 import ErrorBoundary from "./components/error/errorboundary";
 import Header from "./components/partials/header";
 import Footer from "./components/partials/footer";
@@ -18,10 +15,7 @@ class App extends React.Component {
     this.state = {};
   }
 
-  componentDidMount = async () => {
-    const doc = await axios.get("/auth/current_user");
-    this.props.setCurrentUser(doc.data);
-  };
+  componentDidMount = async () => {};
 
   render() {
     return (
@@ -45,8 +39,4 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-});
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;

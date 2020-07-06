@@ -40,22 +40,20 @@ module.exports = (app) => {
       failureRedirect: "/signin",
     }),
     (req, res) => {
-      res.send("success");
+      res.send({ message: "SignIn successfully" });
     }
   );
 
   app.post("/api/user/signup", checkNotAuthenticated, async (req, res) => {
-    console.log("SIGNUP: Get user infor from frontend", req.body);
     const doc = await User.findOne({ email: req.body.email });
     if (doc) return res.send({ error: "This email has been registed." });
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const user = await new User({
+    await new User({
       createAt: new Date(),
       password: hashedPassword,
       email: req.body.email,
       username: req.body.username,
     }).save();
-    console.log("SIGNUP: Get user infor from database", user);
     res.send({ message: "signup successfully" });
   });
 
@@ -64,8 +62,8 @@ module.exports = (app) => {
     res.send(req.user);
   });
 
-  app.get("/auth/logout", (req, res) => {
+  app.post("/auth/logout", (req, res) => {
     req.logout();
-    res.redirect("/signin");
+    res.send({ message: "SignOut successfully" });
   });
 };

@@ -1,8 +1,6 @@
 import React from "react";
-import axios from "axios";
 import Alert from "@material-ui/lab/Alert";
 import {
-  Card,
   CardContent,
   Typography,
   Button,
@@ -10,6 +8,9 @@ import {
   Container,
   Snackbar,
 } from "@material-ui/core";
+import * as actions from "../actions";
+import { connect } from "react-redux";
+import axios from "axios";
 
 class SignIn extends React.Component {
   state = {
@@ -19,17 +20,14 @@ class SignIn extends React.Component {
   };
 
   handleSignIn = async () => {
-    const { email, password, username } = this.state;
-    const doc = await axios.post("/api/user/signin", {
-      email,
-      password,
+    const { email, password } = this.state;
+    this.props.UserSignIn({ email, password }, (res) => {
+      if (res && res.data.message === "SignIn successfully") {
+        this.props.history.push("/");
+      } else {
+        this.setState({ error: true });
+      }
     });
-    console.log(doc);
-    if (doc && doc.data === "success") {
-      window.location = "/";
-    } else {
-      this.setState({ error: true });
-    }
   };
 
   render() {
@@ -79,7 +77,7 @@ class SignIn extends React.Component {
                 marginTop: 10,
                 backgroundColor: "#4285F4",
               }}
-              href="/auth/google"
+              onClick={this.props.GoogleSignIn}
             >
               Google Account
             </Button>
@@ -100,4 +98,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default connect(null, actions)(SignIn);

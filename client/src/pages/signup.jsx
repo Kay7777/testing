@@ -89,7 +89,7 @@ class SignUp extends React.Component {
                 marginTop: 10,
                 backgroundColor: "#4285F4",
               }}
-              href="/auth/google"
+              onClick={this.props.GoogleSignIn}
             >
               Google Account
             </Button>
