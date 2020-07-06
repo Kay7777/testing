@@ -16,8 +16,7 @@ export const UserSignIn = (props, cb) => async (dispatch) => {
 };
 
 export const GoogleSignIn = () => async (dispatch) => {
-  console.log("google sign in on click");
-  await axios.get("/auth/google");
+  console.log("google sign in");
   const doc = await axios.get("/auth/current_user");
   dispatch({ type: UserActionTypes.SET_CURRENT_USER, payload: doc.data });
 };

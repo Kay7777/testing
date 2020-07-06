@@ -8,6 +8,7 @@ const PostPage = lazy(() => import("./pages/post"));
 const UserPage = lazy(() => import("./pages/user"));
 const SignIn = lazy(() => import("./pages/signin"));
 const SignUp = lazy(() => import("./pages/signup"));
+const GetCurrentUser = lazy(() => import("./pages/get-current-user"));
 
 class App extends React.Component {
   constructor() {
@@ -29,6 +30,11 @@ class App extends React.Component {
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/user" component={UserPage} />
               <Route path="/post/:id" component={PostPage} />
+              <Route
+                exact
+                path="/get_current_user"
+                component={GetCurrentUser}
+              />
             </Suspense>
           </ErrorBoundary>
 

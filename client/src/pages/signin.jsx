@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import * as actions from "../actions";
 import { connect } from "react-redux";
-import axios from "axios";
 
 class SignIn extends React.Component {
   state = {
@@ -77,7 +76,7 @@ class SignIn extends React.Component {
                 marginTop: 10,
                 backgroundColor: "#4285F4",
               }}
-              onClick={this.props.GoogleSignIn}
+              href="/auth/google"
             >
               Google Account
             </Button>
