@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "@material-ui/core";
-import Post from "../components/forms/post";
+import Post from "../components/post/form";
 import PostCard from "../assets/postcard";
 import { connect } from "react-redux";
 import { selectAllPosts } from "../selectors/post";
