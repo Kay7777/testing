@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Button } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import Post from "../components/post/form";
 import PostCard from "../assets/postcard";
 import { connect } from "react-redux";
@@ -33,7 +33,7 @@ class UserPage extends React.Component {
   };
 
   render() {
-    const { cards, post } = this.state;
+    const { cards } = this.state;
     const { currentUser } = this.props;
     return (
       <div>

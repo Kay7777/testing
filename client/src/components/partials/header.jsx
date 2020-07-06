@@ -78,4 +78,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, actions)(React.memo(Header));

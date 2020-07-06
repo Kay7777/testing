@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import ErrorBoundary from "./components/error/errorboundary";
 import Header from "./components/partials/header";
 import Footer from "./components/partials/footer";
+import React, { lazy, Suspense } from "react";
 const MainPage = lazy(() => import("./pages/main"));
 const PostPage = lazy(() => import("./pages/post"));
 const UserPage = lazy(() => import("./pages/user"));
@@ -24,7 +24,7 @@ class App extends React.Component {
         <BrowserRouter>
           <Header />
           <ErrorBoundary>
-            <Suspense fallback={null}>
+            <Suspense fallback={<div>Loading ...</div>}>
               <Route exact path="/" component={MainPage} />
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/signin" component={SignIn} />
